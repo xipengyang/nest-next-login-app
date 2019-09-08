@@ -9,7 +9,7 @@ interface Address {
 }
 
 export interface User extends Document {
-    name: string;
+    username: string;
     password: string;
     address: Address;
     created: Date;
