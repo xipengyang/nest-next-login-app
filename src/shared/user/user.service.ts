@@ -9,7 +9,7 @@ import { RegisterDTO, LoginDTO } from 'src/auth/auth.dto';
 export class UserService {
   constructor(@InjectModel('User') private userModel: Model<User>) {}
 
-  private sanitizeUser(user: User) {
+  private sanitizeUser(user: User): Partial<User> {
     return user.depopulate('password');
   }
 
@@ -27,12 +27,14 @@ export class UserService {
 
   async findbyLogin(userDto: LoginDTO) {
     const { username, password } = userDto;
-    const user = await this.userModel.findOne({ username });
-    if (!user) {
+    const { password: hashed } = await this.userModel
+      .findOne({ username })
+      .select('password');
+    if (!hashed) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
-    if (await bcrypt.compare(password, user.password)) {
-      return this.sanitizeUser(user);
+    if (await bcrypt.compare(password, hashed)) {
+      return { username, authenticated: true };
     } else {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }

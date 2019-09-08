@@ -1,14 +1,14 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from '../shared/user/user.service';
 import { logicalExpression } from '@babel/types';
-import { RegisterDTO } from './auth.dto';
+import { RegisterDTO, LoginDTO } from './auth.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private userService: UserService) {}
 
   @Post('login')
-  async login(@Body() userDto: any) {
+  async login(@Body() userDto: LoginDTO) {
     return this.userService.findbyLogin(userDto);
   }
 
