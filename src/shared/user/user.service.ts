@@ -27,16 +27,21 @@ export class UserService {
 
   async findbyLogin(userDto: LoginDTO) {
     const { username, password } = userDto;
-    const { password: hashed } = await this.userModel
+    const { password: hashed, seller } = await this.userModel
       .findOne({ username })
-      .select('password');
+      .select('password seller');
     if (!hashed) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
     if (await bcrypt.compare(password, hashed)) {
-      return { username, authenticated: true };
+      return { username, authenticated: true, seller };
     } else {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
+  }
+
+  async findByPayload(payload: any) {
+    const { username } = payload;
+    return await this.userModel.findOne({ username });
   }
 }
