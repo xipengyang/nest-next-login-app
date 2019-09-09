@@ -33,8 +33,8 @@ export class AuthController {
     return { username, seller, token };
   }
 
-  @Get()
   @UseGuards(AuthGuard('jwt'))
+  @Get()
   tempAuth() {
     return { auth: 'works' };
   }
