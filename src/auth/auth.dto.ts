@@ -3,6 +3,6 @@ export interface LoginDTO {
   password: string;
 }
 
-export interface RegisterDTO extends LoginDTO {
+export interface UserDTO extends LoginDTO {
   seller?: boolean;
 }

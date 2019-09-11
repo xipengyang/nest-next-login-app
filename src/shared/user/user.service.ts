@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { User } from '../../types/user';
 import { InjectModel } from '@nestjs/mongoose';
-import { RegisterDTO, LoginDTO } from 'src/auth/auth.dto';
+import { UserDTO, LoginDTO } from 'src/auth/auth.dto';
 
 @Injectable()
 export class UserService {
@@ -13,7 +13,7 @@ export class UserService {
     return user.depopulate('password');
   }
 
-  async create(userDto: RegisterDTO) {
+  async create(userDto: UserDTO) {
     const { username } = userDto;
     const user = await this.userModel.findOne({ username });
     if (user) {
@@ -43,5 +43,9 @@ export class UserService {
   async findByPayload(payload: any) {
     const { username } = payload;
     return await this.userModel.findOne({ username });
+  }
+
+  async findAll() {
+    return await this.userModel.find();
   }
 }

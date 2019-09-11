@@ -7,7 +7,6 @@ export class AuthService {
   constructor(private userService: UserService) {}
 
   async validateUser(payload: any) {
-    console.log('validate user', payload);
     return await this.userService.findByPayload(payload);
   }
 

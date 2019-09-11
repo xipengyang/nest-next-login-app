@@ -1,8 +1,9 @@
 import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
 import { UserService } from '../shared/user/user.service';
-import { RegisterDTO, LoginDTO } from './auth.dto';
+import { UserDTO, LoginDTO } from './auth.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
+import { Principal } from '../utilities/principal.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -23,7 +24,7 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() userDto: RegisterDTO) {
+  async register(@Body() userDto: UserDTO) {
     const { username, seller } = await this.userService.create(userDto);
     const payload = {
       username,
@@ -35,7 +36,9 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
-  tempAuth() {
-    return { auth: 'works' };
+  async findAll(@Principal() principal: UserDTO) {
+    console.log(principal);
+    const users = await this.userService.findAll();
+    return users;
   }
 }
