@@ -4,6 +4,7 @@ import { UserDTO, LoginDTO } from './auth.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { Principal } from '../utilities/principal.decorator';
+import { AdminGuard } from '../guards/admin.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -34,7 +35,7 @@ export class AuthController {
     return { username, seller, token };
   }
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), AdminGuard)
   @Get()
   async findAll(@Principal() principal: UserDTO) {
     console.log(principal);
