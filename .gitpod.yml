@@ -1,0 +1,9 @@
+image: gitpod/wordspace-mongodb
+
+tasks:
+  - init: npm install
+    command: npm run start:dev
+
+ports:
+  - port: 3000
+    onOpen: open-preview
