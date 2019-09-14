@@ -1,10 +1,12 @@
 import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import Next from 'next';
 import { RenderModule } from 'nest-next';
+import Next from 'next';
+import 'reflect-metadata';
+
 async function bootstrap() {
-  const app = Next({ dev: process.env.NODE_ENV !== 'produciton' });
+  const app = Next({ dev: process.env.NODE_ENV !== 'production' });
   await app.prepare();
 
   const server = await NestFactory.create(AppModule);
