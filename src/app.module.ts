@@ -8,7 +8,10 @@ import { RenderModule } from 'nest-next';
 @Module({
   imports: [
     RenderModule,
-    MongooseModule.forRoot(process.env.MONGO_URI, { useNewUrlParser: true }),
+    MongooseModule.forRoot(
+      process.env.MONGO_URI || 'mongodb://localhost:27017/nest',
+      { useNewUrlParser: true },
+    ),
     SharedModule,
     AuthModule,
   ],

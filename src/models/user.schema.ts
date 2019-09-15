@@ -27,8 +27,8 @@ UserSchema.pre('save', async function(next: mongoose.HookNextFunction) {
     if (!this.isModified('password')) {
       return next();
     }
-    const hashed = await bcrypt.hash(this['password'], 10);
-    this['password'] = hashed;
+    const hashed = await bcrypt.hash(this.get('password'), 10);
+    this.set('password', hashed);
     return next();
   } catch (err) {
     return next(err);

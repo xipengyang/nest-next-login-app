@@ -27,13 +27,15 @@ export class UserService {
 
   async findbyLogin(userDto: LoginDTO) {
     const { username, password } = userDto;
-    const { password: hashed, seller } = await this.userModel
+    const userRecord = await this.userModel
       .findOne({ username })
       .select('password seller');
-    if (!hashed) {
-      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
-    }
-    if (await bcrypt.compare(password, hashed)) {
+    if (
+      userRecord &&
+      userRecord.password &&
+      (await bcrypt.compare(password, userRecord.password))
+    ) {
+      const { seller } = userRecord;
       return { username, authenticated: true, seller };
     } else {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
