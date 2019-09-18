@@ -38,7 +38,6 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Get()
   async findAll(@Principal() principal: UserDTO) {
-    console.log(principal);
     const users = await this.userService.findAll();
     return users;
   }
