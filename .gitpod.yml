@@ -1,8 +1,8 @@
 image: gitpod/workspace-mongodb
 
 tasks:
-  - init: npm install
-    command: npm run start:dev
+  - init: yarn add nodemon -g && yarn
+    command: mongod
 
 ports:
   - port: 3000

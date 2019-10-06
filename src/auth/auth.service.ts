@@ -11,6 +11,6 @@ export class AuthService {
   }
 
   async signPayload(payload: any) {
-    return sign(payload, process.env.JWT_SECRET, { expiresIn: '12h' });
+    return sign(payload, process.env.JWT_SECRET!, { expiresIn: '12h' });
   }
 }
