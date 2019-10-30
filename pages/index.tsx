@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Root = styled.div`
@@ -37,9 +37,18 @@ const Field = styled.div`
     padding: 0 0.3125rem;
     height: 2.5rem;
 
-    &:focus {
+    &:invalid:focus {
       & + span::before {
         font-size: 0.5rem;
+        color: black;
+        top: 0px;
+      }
+    }
+
+    &:valid {
+      & + span::before {
+        font-size: 0.5rem;
+        color: black;
         top: 0px;
       }
     }
@@ -52,7 +61,7 @@ const Field = styled.div`
     left: 0.3125rem;
     color: #adadad;
     transform: translateY(-50%);
-    transition: 0.5s;
+    transition: 0.35s;
   }
 `;
 
@@ -69,26 +78,32 @@ const LoginBtn = styled.input`
   }
 `;
 
-const Index = () => (
-  <Root>
-    <LoginForm>
-      <h1> Dealer Portal</h1>
+const Index = () => {
+  const [name, setName] = useState('');
 
-      <Field>
-        <input type="text" />
-        <span data-placeholder="Username" />
-      </Field>
-      <Field>
-        <input type="text" />
-        <span data-placeholder="Password" />
-      </Field>
+  const onInputChange = () => {};
 
-      <LoginBtn type="submit" value="Login" />
-      <div>
-        New to the app? <a href="#"> sign up now</a>
-      </div>
-    </LoginForm>
-  </Root>
-);
+  return (
+    <Root>
+      <LoginForm>
+        <h1> Dealer Portal</h1>
+
+        <Field>
+          <input type="text" onChange={onInputChange} required />
+          <span data-placeholder="Username" />
+        </Field>
+        <Field>
+          <input type="text" required />
+          <span data-placeholder="Password" />
+        </Field>
+
+        <LoginBtn type="submit" value="Login" />
+        <div>
+          New to the app? <a href="#"> sign up now</a>
+        </div>
+      </LoginForm>
+    </Root>
+  );
+};
 
 export default Index;

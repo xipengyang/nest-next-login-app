@@ -11,7 +11,7 @@ const theme = {
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 body{
-    font-family: 'Roboto Mono', monospace;   
+    font-family: 'arial';   
 }
 div#__next, html, body {
     margin: 0;
