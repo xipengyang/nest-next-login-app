@@ -11,6 +11,6 @@ export class AppController {
   @Get()
   public index(@Res() res: RenderableResponse, @Principal() principal: any) {
     console.log(principal);
-    res.render('Index', {});
+    res.render('index', {});
   }
 }

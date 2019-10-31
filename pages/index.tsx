@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 
 const Root = styled.div`
@@ -13,6 +13,8 @@ const Root = styled.div`
 const LoginForm = styled.form`
   width: 360px;
   height: 580px;
+  display: flex;
+  flex-direction: column;
   padding: 5rem 3rem;
   border-radius: 10px;
   background: #fff;
@@ -68,32 +70,45 @@ const Field = styled.div`
 const LoginBtn = styled.input`
   display: block;
   font-size: 1rem;
-  width: 100%;
   height: 3.125rem;
   border: none;
+  margin: 1rem;
 
   &:hover {
     background-image: linear-gradient(120deg, #3498db, #8e44ad);
     cursor: pointer;
+    color: white;
   }
 `;
 
 const Index = () => {
   const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
 
-  const onInputChange = () => {};
+  const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setName(event.target.value);
+  };
+
+  const onPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setPassword(event.target.value);
+  };
+
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+      console.log('name '+ name + ' password ' + password);
+      event.preventDefault();
+  }
 
   return (
     <Root>
-      <LoginForm>
+      <LoginForm onSubmit={handleFormSubmit}>
         <h1> Dealer Portal</h1>
 
         <Field>
-          <input type="text" onChange={onInputChange} required />
+          <input type="text" onChange={onNameChange} required />
           <span data-placeholder="Username" />
         </Field>
         <Field>
-          <input type="text" required />
+          <input type="password" onChange={onPasswordChange}  required />
           <span data-placeholder="Password" />
         </Field>
 
