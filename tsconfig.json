@@ -24,7 +24,8 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noUnusedLocals": true
   },
   "include": ["./pages/**/*", "./src/**/*", "./ui/**/*"],
   "exclude": ["node_modules"]
