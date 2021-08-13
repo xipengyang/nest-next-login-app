@@ -26,7 +26,7 @@
     "bcrypt": "^3.0.6",
     "mongoose": "^5.6.13",
     "nest-next": "9.1.0",
-    "next": "^9.0.6",
+    "next": "^11.1.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "react": "^16.9.0",
